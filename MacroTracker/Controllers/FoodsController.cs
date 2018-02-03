@@ -4,33 +4,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static MacroTracker.Models.Food;
+
+
 
 namespace MacroTracker.Controllers
 {
 
     public class FoodsController : Controller
     {
+        public object FoodList { get; private set; }
 
-       
-
-       public List<Food> foodExamples = new List<Food>
-       {
-           new Food{ FoodId = 1, FoodName = "Avocado", FatGrams = 30.1, ProteinGrams = 3.3, CarbGrams = 4 },
-           new Food{ FoodId = 2, FoodName = "Greek Yogurt", FatGrams = 0, ProteinGrams = 25, CarbGrams = 5 },
-           new Food{ FoodId = 3, FoodName = "Small Chicken Breast", FatGrams = 0.8, ProteinGrams = 22.5, CarbGrams = 4.1 },
-           new Food{ FoodId = 4, FoodName = "Banana", FatGrams = 2, ProteinGrams = 1.2, CarbGrams = 35.2 }
-       };
-        
         // GET: Foods
         public ActionResult Index()
         {
-           
-            return View(foodExamples);
-        }
+            using (var foodContext = new FoodContext())
+            {
+                var foodItem = new FoodList {
+                    {
+                    FoodList = foodContext.FoodExamples.Select(f => new Food
+                    {
+                    FoodId = f.FoodId,
+                    FoodName = f.FoodName,
+                    FatGrams = f.FatGrams,
+                    CarbGrams =  f.CarbGrams,
+                    ProteinGrams = f.ProteinGrams
+                    }).ToList()
+                    } };
+            };
 
-        // GET: Foods/Details/5
-        public ActionResult Details(int id)
+            
+
+            return View();
+            }
+
+            // GET: Foods/Details/5
+            public ActionResult Details(int id)
         {
             return View();
         }
