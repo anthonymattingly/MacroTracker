@@ -7,6 +7,7 @@ namespace MacroTracker.Models
 {
     public class FoodsConsumedViewModel
     {
-        public List<FoodsViewModel> FoodsConsumed { get; set; }
+        public List<Foods> FoodsConsumed { get; set; }
+        public DateTime DateConsumed { get; set; }
     }
 }

@@ -149,7 +149,6 @@
     </Compile>
     <Compile Include="Models\Foods.cs" />
     <Compile Include="Models\FoodsConsumedViewModel.cs" />
-    <Compile Include="Models\FoodsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

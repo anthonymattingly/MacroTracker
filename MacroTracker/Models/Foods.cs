@@ -12,5 +12,10 @@ namespace MacroTracker.Models
         public double FatGrams { get; set; }
         public double CarbGrams { get; set; }
         public double ProteinGrams { get; set; }
+
+        public static implicit operator Foods(List<Foods> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
