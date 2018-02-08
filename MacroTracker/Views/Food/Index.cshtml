@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MacroTracker.Models.Food>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    What'd you have to eat??
+    @foreach (var item in Model)
+    {
+        <div>
+            
+            @item.FoodId
+            @item.FoodName
+            @item.CarbGrams
+            @item.FatGrams
+            @item.ProteinGrams
+
+
+        </div>
+    }
+</p>
+

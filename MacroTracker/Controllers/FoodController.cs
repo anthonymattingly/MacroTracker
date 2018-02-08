@@ -10,34 +10,32 @@ using System.Web.Mvc;
 namespace MacroTracker.Controllers
 {
 
-    public class FoodsController : Controller
+    public class FoodController : Controller
     {
-        public object FoodList { get; private set; }
+        
+        private FoodContext db = new FoodContext();
 
         // GET: Foods
         public ActionResult Index()
         {
+
+
+
             using (var foodContext = new FoodContext())
             {
-                var foodItem = new FoodList {
-                    {
-                    FoodList = foodContext.FoodExamples.Select(f => new Food
-                    {
-                    FoodId = f.FoodId,
-                    FoodName = f.FoodName,
-                    FatGrams = f.FatGrams,
-                    CarbGrams =  f.CarbGrams,
-                    ProteinGrams = f.ProteinGrams
-                    }).ToList()
-                    } };
-            };
+                var model = new List<Food>();
 
-            
-
-            return View();
+                model.Add(new Food { FoodId = 1, FoodName = "Peanut Butter", CarbGrams = 4.6, ProteinGrams = 7.1, FatGrams = 30 });
+                model.Add(new Food { FoodId = 2, FoodName = "Oatmeal", CarbGrams = 46.2, ProteinGrams = 3, FatGrams = 1.1 });
+                model.Add(new Food { FoodId = 3, FoodName = "Peanut Butter", CarbGrams = 13.5, ProteinGrams = 4.1, FatGrams = 14 });
+                model.Add(new Food { FoodId = 4, FoodName = "Hamburger", CarbGrams = 53, ProteinGrams = 88.0, FatGrams = 11 });
+                return View(model);
             }
 
-            // GET: Foods/Details/5
+
+        }
+
+        //GET: Foods/Details/5
             public ActionResult Details(int id)
         {
             return View();
