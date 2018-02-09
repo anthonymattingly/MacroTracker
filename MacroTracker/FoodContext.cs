@@ -6,16 +6,22 @@ using System.Collections.Generic;
 
 namespace MacroTracker
 {
-    
+
 
     public class FoodContext : DbContext
     {
 
         public FoodContext() : base("name=Food") { }
-        
+
         public virtual DbSet<Food> FoodExamples { get; set; }
-       
+
     }
 
+    //TODO Create a Class within Context Specifically for retrieving API data
+
+    //public class GetAPIContext{
+
+    //}
+       
     
 }

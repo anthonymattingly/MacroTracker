@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MacroTracker.Models.Food>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -7,18 +8,57 @@
 
 <p>
     What'd you have to eat??
-    @foreach (var item in Model)
+ 
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoodName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CarbGrams)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FatGrams)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProteinGrams)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        
+        @foreach (var item in Model)
     {
-        <div>
-            
-            @item.FoodId
-            @item.FoodName
-            @item.CarbGrams
-            @item.FatGrams
-            @item.ProteinGrams
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarbGrams)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FatGrams)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProteinGrams)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FoodId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FoodId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FoodId })
+            </td>
+        </tr>
+}
+    </table>
 
 
-        </div>
-    }
-</p>
 
