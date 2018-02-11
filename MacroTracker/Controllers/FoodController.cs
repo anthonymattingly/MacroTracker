@@ -138,7 +138,7 @@ namespace MacroTracker.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
-            return RedirectToAction("Delete");
+            return RedirectToAction("Index");
         }
     }
 }

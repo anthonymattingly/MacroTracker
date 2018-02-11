@@ -10,6 +10,7 @@ namespace MacroTracker.Models
 {
     public class Food
     {
+        [DisplayName("Item No.")]
         public int FoodId { get; set; }
 
         [DisplayName("Food Name")]
