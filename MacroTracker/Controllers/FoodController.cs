@@ -20,7 +20,7 @@ namespace MacroTracker.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.FoodExamples.ToList());
+            return View(db.Foods.ToList());
         }
 
         [HttpGet]
@@ -33,7 +33,7 @@ namespace MacroTracker.Controllers
             }
 
 
-            return View(db.FoodExamples.ToList());
+            return View(db.Foods.ToList());
         }
 
         [HttpGet]
@@ -60,19 +60,16 @@ namespace MacroTracker.Controllers
 
         [HttpPost]
        [ValidateAntiForgeryToken]
-        public ActionResult CreateFood([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
+        public ActionResult Create([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
         {
             using (var foodContext = new FoodContext()) { 
             try
             {
                 if (ModelState.IsValid)
                 {
-                        db.FoodExamples.Add(food);
+                        db.Foods.Add(food);
                         db.SaveChanges();
                         return RedirectToAction("Index");
-                        //foodContext.FoodExamples.Add(food);
-                        //foodContext.SaveChanges();
-                        //return RedirectToAction("Index");
                     }
                 }
             catch (DataException /* dex */)
@@ -106,26 +103,42 @@ namespace MacroTracker.Controllers
             }
         }
 
-        // GET: Foods/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Food/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+            }
+            Food food = db.Foods.Find(id);
+            if (food == null)
+            {
+                return HttpNotFound();
+            }
+            return View(food);
         }
 
         // POST: Foods/Delete/5
         [HttpPost]
-        public ActionResult DeleteEntry(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                Food food = db.Foods.Find(id);
+                db.Foods.Remove(food);
+                db.SaveChanges();
             }
-            catch
+            catch (DataException/* dex */)
             {
-                return View();
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+            return RedirectToAction("Delete");
         }
     }
 }

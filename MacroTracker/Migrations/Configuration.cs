@@ -15,7 +15,7 @@ namespace MacroTracker.Migrations
 
         protected override void Seed(MacroTracker.FoodContext context)
         {
-            context.FoodExamples.AddOrUpdate(
+            context.Foods.AddOrUpdate(
                 f => f.FoodId,
                 new Food { FoodId = 1, FoodName = "Avocado", FatGrams = 30.1, ProteinGrams = 3.3, CarbGrams = 4 },
                 new Food { FoodId = 2, FoodName = "Greek Yogurt", FatGrams = 0, ProteinGrams = 25, CarbGrams = 5 },

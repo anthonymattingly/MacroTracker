@@ -13,7 +13,7 @@ namespace MacroTracker
 
         public FoodContext() : base("name=Food") { }
 
-        public virtual DbSet<Food> FoodExamples { get; set; }
+        public virtual DbSet<Food> Foods { get; set; }
 
     }
 
