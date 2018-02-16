@@ -63,44 +63,69 @@ namespace MacroTracker.Controllers
         public ActionResult Create([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
         {
             using (var foodContext = new FoodContext()) { 
-            try
-            {
+            //try
+            //{
                 if (ModelState.IsValid)
                 {
                         db.Foods.Add(food);
                         db.SaveChanges();
                         return RedirectToAction("Index");
-                    }
+                    //}
                 }
-            catch (DataException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
+            //catch (DataException /* dex */)
+            //{
+            //    //Log the error (uncomment dex variable name and add a line here to write a log.
+            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            //}
             return View(food);
         }
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Food food = db.Foods.Find(id);
+
+            if (food == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(food);
         }
 
         
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditFood(int? id)
         {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var foodToUpdate = db.Foods.Find(id);
+
             try
             {
-                // TODO: Add update logic here
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
-            }
-            catch
+               }
+
+            catch (DataException /* dex */)
             {
-                return View();
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
+
+            return View(foodToUpdate);
+            
         }
 
         // GET: Food/Delete/5
@@ -127,17 +152,11 @@ namespace MacroTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            try
-            {
-                Food food = db.Foods.Find(id);
-                db.Foods.Remove(food);
-                db.SaveChanges();
-            }
-            catch (DataException/* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-            }
+            
+            Food food = db.Foods.Find(id);
+            db.Foods.Remove(food);
+            db.SaveChanges();
+           
             return RedirectToAction("Index");
         }
     }
