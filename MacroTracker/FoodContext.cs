@@ -4,6 +4,7 @@ using System.Linq;
 using MacroTracker.Models;
 using System.Collections.Generic;
 
+
 namespace MacroTracker
 {
 
@@ -16,12 +17,5 @@ namespace MacroTracker
         public virtual DbSet<Food> Foods { get; set; }
 
     }
-
-    //TODO Create a Class within Context Specifically for retrieving API data
-
-    //public class GetAPIContext{
-
-    //}
-       
-    
+ 
 }

@@ -99,7 +99,7 @@ namespace MacroTracker.Controllers
             return View(food);
         }
 
-        
+
         [HttpPost]
         public ActionResult EditFood(int? id)
         {
@@ -111,22 +111,25 @@ namespace MacroTracker.Controllers
 
             var foodToUpdate = db.Foods.Find(id);
 
-            try
+            if (id != null)
             {
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
-               }
-
-            catch (DataException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
-            return View(foodToUpdate);
             
+            //catch (DataException /* dex */)
+            //{
+            //    //Log the error (uncomment dex variable name and add a line here to write a log.
+            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            //}
+
+            return View(foodToUpdate);
+
         }
+
+
 
         // GET: Food/Delete/5
         public ActionResult Delete(int? id, bool? saveChangesError = false)
