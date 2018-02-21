@@ -81,6 +81,30 @@ namespace MacroTracker.Controllers
         }
         }
 
+        [HttpPost,ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
+        {
+            using (var foodContext = new FoodContext())
+            {
+                //try
+                //{
+                if (ModelState.IsValid)
+                {
+                    db.Foods.Add(food);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                    //}
+                }
+                //catch (DataException /* dex */)
+                //{
+                //    //Log the error (uncomment dex variable name and add a line here to write a log.
+                //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                //}
+                return View(food);
+            }
+        }
+
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -100,34 +124,63 @@ namespace MacroTracker.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult EditFood(int? id)
-        {
+        //[HttpPost]
+        //public ActionResult EditFood(int? id)
+        //{
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            var foodToUpdate = db.Foods.Find(id);
+        //    var foodToUpdate = db.Foods.Find(id);
 
-            if (id != null)
-            {
-                db.SaveChanges();
+        //    if (id != null)
+        //    {
+        //        db.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
+        //        return RedirectToAction("Index");
+        //    }
 
             
-            //catch (DataException /* dex */)
-            //{
-            //    //Log the error (uncomment dex variable name and add a line here to write a log.
-            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            //}
+        //    //catch (DataException /* dex */)
+        //    //{
+        //    //    //Log the error (uncomment dex variable name and add a line here to write a log.
+        //    //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //    //}
 
-            return View(foodToUpdate);
+        //    return View(foodToUpdate);
 
-        }
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditFood([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    var foodToUpdate = db.Foods.Find(id);
+
+        //    if (id != null)
+        //    {
+        //        db.SaveChanges();
+
+        //        return RedirectToAction("Index");
+        //    }
+
+
+        //    //catch (DataException /* dex */)
+        //    //{
+        //    //    //Log the error (uncomment dex variable name and add a line here to write a log.
+        //    //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //    //}
+
+        //    return View(foodToUpdate);
+        //}
+        
 
 
 
