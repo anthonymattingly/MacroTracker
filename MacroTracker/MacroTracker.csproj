@@ -156,8 +156,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FoodsConsumedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802232029102_FoodsConsumedDb.cs" />
+    <Compile Include="Migrations\201802232029102_FoodsConsumedDb.Designer.cs">
+      <DependentUpon>201802232029102_FoodsConsumedDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
@@ -170,7 +175,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Food.cs" />
-    <Compile Include="Models\FoodsConsumedViewModel.cs" />
+    <Compile Include="Models\FoodsConsumed.cs" />
     <Compile Include="Properties\App_Start\RouteConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -209,13 +214,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Food\Index.cshtml" />
     <Content Include="Views\Food\Details.cshtml" />
     <Content Include="Views\Food\Create.cshtml" />
     <Content Include="Views\Food\Delete.cshtml" />
     <Content Include="Views\Food\Edit.cshtml" />
+    <Content Include="Views\Entries\FoodsConsumed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,6 +241,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802032108257_InitialMigration.resx">
       <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802232029102_FoodsConsumedDb.resx">
+      <DependentUpon>201802232029102_FoodsConsumedDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

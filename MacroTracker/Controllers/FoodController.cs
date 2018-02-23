@@ -28,7 +28,7 @@ namespace MacroTracker.Controllers
         [HttpGet]
         public ActionResult Details(int? id)
         {
-            //ToDo--Make sure duplicate item not selected
+            
             using (var foodContext = new FoodContext())
             {
                 if (id == null)
@@ -36,7 +36,13 @@ namespace MacroTracker.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                return View(foodContext.Foods.ToList());
+                Food food = foodContext.Foods.Find(id);
+
+                if (food == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(food);
             }
         }
 

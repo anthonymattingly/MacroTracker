@@ -6,9 +6,10 @@ using System.Web;
 
 namespace MacroTracker.Models
 {
-    public class FoodsConsumedViewModel
+    public class FoodsConsumed
     {
-        public List<Food> FoodsConsumed { get; set; }
+        public int? FoodsConsumedId { get; set; }
+        public List<Food> FoodsEaten { get; set; }
         public DateTime DateConsumed { get; set; }
     }
 }

@@ -30,9 +30,5 @@ namespace MacroTracker.Models
         [Range(0, 9999)]
         public double ProteinGrams { get; set; }
 
-
-
-
-
     }
 }

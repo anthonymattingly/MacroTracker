@@ -16,6 +16,8 @@ namespace MacroTracker
 
         public virtual DbSet<Food> Foods { get; set; }
 
+        public virtual DbSet<FoodsConsumed> FoodsConsumedDb { get; set; }
+
     }
  
 }
