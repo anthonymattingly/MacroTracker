@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(x => x.FoodId)
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">

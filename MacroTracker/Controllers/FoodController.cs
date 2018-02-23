@@ -14,26 +14,30 @@ namespace MacroTracker.Controllers
 
     public class FoodController : Controller
     {
-        
-        private FoodContext db = new FoodContext();
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.Foods.ToList());
+            using (var foodContext = new FoodContext())
+            {
+                return View(foodContext.Foods.ToList());
+            }
         }
+    
 
         [HttpGet]
         public ActionResult Details(int? id)
         {
             //ToDo--Make sure duplicate item not selected
-            if (id == null)
+            using (var foodContext = new FoodContext())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                return View(foodContext.Foods.ToList());
             }
-
-
-            return View(db.Foods.ToList());
         }
 
         [HttpGet]
@@ -43,164 +47,83 @@ namespace MacroTracker.Controllers
             return View("Create", food);
         }
 
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
         [HttpPost]
-       [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
+        public ActionResult Create(Food food)
         {
-            using (var foodContext = new FoodContext()) { 
-            //try
-            //{
-                if (ModelState.IsValid)
-                {
-                        db.Foods.Add(food);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    //}
-                }
-            //catch (DataException /* dex */)
-            //{
-            //    //Log the error (uncomment dex variable name and add a line here to write a log.
-            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            //}
-            return View(food);
-        }
-        }
-
-        [HttpPost,ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]Food food)
-        {
-            using (var foodContext = new FoodContext())
+            if (ModelState.IsValid)
             {
-                //try
-                //{
-                if (ModelState.IsValid)
+                using (var foodContext = new FoodContext())
                 {
-                    db.Foods.Add(food);
-                    db.SaveChanges();
+                    foodContext.Foods.Add(food);
+                    foodContext.SaveChanges();
                     return RedirectToAction("Index");
-                    //}
                 }
-                //catch (DataException /* dex */)
-                //{
-                //    //Log the error (uncomment dex variable name and add a line here to write a log.
-                //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                //}
-                return View(food);
             }
+            return View(food);
         }
 
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            using (var foodContext = new FoodContext())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                Food food = foodContext.Foods.Find(id);
+
+                if (food == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(food);
             }
+        }
 
-            Food food = db.Foods.Find(id);
-
-            if (food == null)
+        [HttpPost,ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Food food)
+        {
+            if (ModelState.IsValid)
             {
-                return HttpNotFound();
-            }
+                using (var foodContext = new FoodContext())
 
+                {
+                    var foodToUpdate = foodContext.Foods.Find(food.FoodId);
+                    foodToUpdate.FoodName = food.FoodName;
+                    foodToUpdate.ProteinGrams = food.ProteinGrams;
+                    foodToUpdate.CarbGrams = food.CarbGrams;
+                    foodToUpdate.FatGrams = food.FatGrams;
+                    foodContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }     
+            }
             return View(food);
         }
 
 
-        //[HttpPost]
-        //public ActionResult EditFood(int? id)
-        //{
-
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-
-        //    var foodToUpdate = db.Foods.Find(id);
-
-        //    if (id != null)
-        //    {
-        //        db.SaveChanges();
-
-        //        return RedirectToAction("Index");
-        //    }
-
-            
-        //    //catch (DataException /* dex */)
-        //    //{
-        //    //    //Log the error (uncomment dex variable name and add a line here to write a log.
-        //    //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //    //}
-
-        //    return View(foodToUpdate);
-
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditFood([Bind(Include = "FoodName, FatGrams, CarbGrams, ProteinGrams")]int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-
-        //    var foodToUpdate = db.Foods.Find(id);
-
-        //    if (id != null)
-        //    {
-        //        db.SaveChanges();
-
-        //        return RedirectToAction("Index");
-        //    }
-
-
-        //    //catch (DataException /* dex */)
-        //    //{
-        //    //    //Log the error (uncomment dex variable name and add a line here to write a log.
-        //    //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //    //}
-
-        //    return View(foodToUpdate);
-        //}
-        
-
-
-
         // GET: Food/Delete/5
-        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        public ActionResult Delete(int? id)
         {
-            if (id == null)
+            using (var foodContext = new FoodContext())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                Food food = foodContext.Foods.Find(id);
+
+                if (food == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(food);
             }
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
-            }
-            Food food = db.Foods.Find(id);
-            if (food == null)
-            {
-                return HttpNotFound();
-            }
-            return View(food);
         }
 
         // POST: Foods/Delete/5
@@ -208,12 +131,14 @@ namespace MacroTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            
-            Food food = db.Foods.Find(id);
-            db.Foods.Remove(food);
-            db.SaveChanges();
-           
-            return RedirectToAction("Index");
+            using (var foodContext = new FoodContext())
+            {
+                Food food = foodContext.Foods.Find(id);
+                foodContext.Foods.Remove(food);
+                foodContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
         }
     }
 }

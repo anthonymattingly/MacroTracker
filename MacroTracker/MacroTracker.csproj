@@ -156,16 +156,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\FoodController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="FoodContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Properties\App_Start\BundleConfig.cs" />
+    <Compile Include="Properties\App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="FoodContext.cs" />
     <Compile Include="Migrations\201802032108257_InitialMigration.cs" />
     <Compile Include="Migrations\201802032108257_InitialMigration.Designer.cs">
       <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
@@ -173,6 +171,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\FoodsConsumedViewModel.cs" />
+    <Compile Include="Properties\App_Start\RouteConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +179,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="index.html" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
