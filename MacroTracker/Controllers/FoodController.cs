@@ -23,7 +23,25 @@ namespace MacroTracker.Controllers
                 return View(foodContext.Foods.ToList());
             }
         }
-    
+
+        //Method adds to list of foods the user has consumed for the day rather than list of foods to choose from
+        //The button to add list of foods the user has consumed appears in Index view
+        //[HttpPost]
+        //public ActionResult Index(FoodsConsumed foodsConsumed)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        using (var foodContext = new FoodContext())
+        //        {
+        //            foodContext.FoodsConsumedDb.Add(foodsConsumed);
+        //            foodContext.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    return View(foodsConsumed);
+        //}
+
+
 
         [HttpGet]
         public ActionResult Details(int? id)
@@ -69,6 +87,8 @@ namespace MacroTracker.Controllers
             return View(food);
         }
 
+       
+
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -89,8 +109,7 @@ namespace MacroTracker.Controllers
             }
         }
 
-        [HttpPost,ActionName("Edit")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Edit(Food food)
         {
             if (ModelState.IsValid)
@@ -134,7 +153,6 @@ namespace MacroTracker.Controllers
 
         // POST: Foods/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             using (var foodContext = new FoodContext())

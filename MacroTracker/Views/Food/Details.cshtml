@@ -1,5 +1,6 @@
 ﻿@model MacroTracker.Models.Food
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -29,27 +30,44 @@
         </tr>
     </thead>
 
-        <tr>
-            <td>
-                @Html.HiddenFor(model => model.FoodId)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.FoodName)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.CarbGrams)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.FatGrams)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.ProteinGrams)
-            </td>
-            <td>
-                @Html.ActionLink("Back to List", "Index")
-            </td>
-        </tr>
-   
+    <tr>
+        <td>
+            @Html.HiddenFor(model => model.FoodId)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FoodName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CarbGrams)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FatGrams)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ProteinGrams)
+        </td>
+        <td>
+            @Html.ActionLink("Back to List", "Index")
+        </td>
+    </tr>
 </table>
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@*@using (Html.BeginForm("FoodsConsumed", "Add", "POST"))
+{
+    @Html.HiddenFor(m => m.FoodId)
+
+    <div class="col-xs-12">
+        <button type="submit" class="btn btn-primary">Save</button>
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+        <hr />
+    </div>
+}*@
+
 
 

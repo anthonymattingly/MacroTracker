@@ -19,11 +19,13 @@ namespace MacroTracker.Migrations
             context.Foods.AddOrUpdate(
                 new Food { FoodId=88, FoodName="TestFoodFromSeed",FatGrams=4,CarbGrams=5,ProteinGrams=8}
                 );
-               
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+          
         }
     }
 }
