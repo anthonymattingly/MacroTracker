@@ -13,7 +13,7 @@ namespace MacroTracker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802251910187_InitialMigration1"; }
+            get { return "201802251938217_InitialMigration1"; }
         }
         
         string IMigrationMetadata.Source

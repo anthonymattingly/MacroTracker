@@ -160,10 +160,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802251910187_InitialMigration1.cs" />
-    <Compile Include="Migrations\201802251910187_InitialMigration1.Designer.cs">
-      <DependentUpon>201802251910187_InitialMigration1.cs</DependentUpon>
+    <Compile Include="Migrations\201802251938217_InitialMigration1.cs" />
+    <Compile Include="Migrations\201802251938217_InitialMigration1.Designer.cs">
+      <DependentUpon>201802251938217_InitialMigration1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FoodsConsumedListViewModel.cs" />
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\FoodController.cs" />
@@ -244,8 +245,8 @@
     <EmbeddedResource Include="Migrations\201802032108257_InitialMigration.resx">
       <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802251910187_InitialMigration1.resx">
-      <DependentUpon>201802251910187_InitialMigration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802251938217_InitialMigration1.resx">
+      <DependentUpon>201802251938217_InitialMigration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
