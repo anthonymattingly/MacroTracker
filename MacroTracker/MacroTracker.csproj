@@ -160,13 +160,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802232029102_FoodsConsumedDb.cs" />
-    <Compile Include="Migrations\201802232029102_FoodsConsumedDb.Designer.cs">
-      <DependentUpon>201802232029102_FoodsConsumedDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802242307518_02_24_2018.cs" />
-    <Compile Include="Migrations\201802242307518_02_24_2018.Designer.cs">
-      <DependentUpon>201802242307518_02_24_2018.cs</DependentUpon>
+    <Compile Include="Migrations\201802251910187_InitialMigration1.cs" />
+    <Compile Include="Migrations\201802251910187_InitialMigration1.Designer.cs">
+      <DependentUpon>201802251910187_InitialMigration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
@@ -248,11 +244,8 @@
     <EmbeddedResource Include="Migrations\201802032108257_InitialMigration.resx">
       <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802232029102_FoodsConsumedDb.resx">
-      <DependentUpon>201802232029102_FoodsConsumedDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802242307518_02_24_2018.resx">
-      <DependentUpon>201802242307518_02_24_2018.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802251910187_InitialMigration1.resx">
+      <DependentUpon>201802251910187_InitialMigration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

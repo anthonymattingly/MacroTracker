@@ -14,6 +14,8 @@ namespace MacroTracker.Models
         [DisplayName("Item No.")]
         public int FoodId { get; set; }
 
+        public FoodsConsumed FoodsConsumedId { get; set; }
+
         [DisplayName("Food Name")]
         [StringLength(50)]
         public string FoodName { get; set; }
@@ -29,8 +31,6 @@ namespace MacroTracker.Models
         [DisplayName("Grams of Protein")]
         [Range(0, 9999)]
         public double ProteinGrams { get; set; }
-
-        public bool HasEaten { get; set; }
 
     }
 }
