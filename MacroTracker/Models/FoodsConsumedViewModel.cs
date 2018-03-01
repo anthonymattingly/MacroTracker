@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-
 namespace MacroTracker.Models
 {
-    public class FoodsConsumed
+    public class FoodsConsumedViewModel
     {
+        public int? FoodsConsumedId { get; set; }
 
-        public int FoodsConsumedId { get; set; }
+        //public List<Food> FoodsEaten { get; set; }
 
         [DisplayName("Food Name")]
         [StringLength(50)]
@@ -30,6 +30,5 @@ namespace MacroTracker.Models
         public double ConsumedProteinGrams { get; set; }
 
         public DateTime DateConsumed { get; set; }
-
     }
 }

@@ -160,20 +160,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802251938217_InitialMigration1.cs" />
-    <Compile Include="Migrations\201802251938217_InitialMigration1.Designer.cs">
-      <DependentUpon>201802251938217_InitialMigration1.cs</DependentUpon>
+    <Compile Include="Migrations\201802282355145_initial.cs" />
+    <Compile Include="Migrations\201802282355145_initial.Designer.cs">
+      <DependentUpon>201802282355145_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FoodListViewModel.cs" />
     <Compile Include="Models\FoodsConsumedListViewModel.cs" />
+    <Compile Include="Models\FoodsConsumedViewModel.cs" />
+    <Compile Include="Models\FoodViewModel.cs" />
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="FoodContext.cs" />
-    <Compile Include="Migrations\201802032108257_InitialMigration.cs" />
-    <Compile Include="Migrations\201802032108257_InitialMigration.Designer.cs">
-      <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\FoodsConsumed.cs" />
@@ -242,11 +241,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802032108257_InitialMigration.resx">
-      <DependentUpon>201802032108257_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802251938217_InitialMigration1.resx">
-      <DependentUpon>201802251938217_InitialMigration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802282355145_initial.resx">
+      <DependentUpon>201802282355145_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

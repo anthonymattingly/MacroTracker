@@ -25,7 +25,11 @@ namespace MacroTracker.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-          
+
+            context.FoodsConsumedDb.AddOrUpdate(
+                new FoodsConsumed { FoodsConsumedId= 1, ConsumedFoodName="Test food consumed", ConsumedCarbGrams=4,ConsumedFatGrams=3,ConsumedProteinGrams=5,DateConsumed=DateTime.Today
+               }
+                );
         }
     }
 }

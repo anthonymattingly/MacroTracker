@@ -1,11 +1,9 @@
-﻿@model IEnumerable<MacroTracker.Models.Food>
-
+﻿@model MacroTracker.Models.FoodListViewModel
 
 
 @{
     ViewBag.Title = "Index";
 }
-
 
 
 <h2>Index</h2>
@@ -17,23 +15,23 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FoodName)
+                    Food Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CarbGrams)
+                    Carb Grams
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FatGrams)
+                    Fat Grams
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProteinGrams)
+                    Protein Grams
                 </th>
                 <th></th>
             </tr>
         </thead>
 
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Foods)
         {
             <tr>
                 <td>

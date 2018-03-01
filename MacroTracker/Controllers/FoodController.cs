@@ -20,7 +20,16 @@ namespace MacroTracker.Controllers
         {
             using (var foodContext = new FoodContext())
             {
-                return View(foodContext.Foods.ToList());
+                var foodListViewModel = new FoodListViewModel();
+                foodListViewModel.Foods = foodContext.Foods.Select(f => new FoodViewModel
+                {
+                    FoodId = f.FoodId,
+                    FoodName = f.FoodName,
+                    CarbGrams = f.CarbGrams,
+                    ProteinGrams = f.ProteinGrams,
+                    FatGrams = f.FatGrams
+                }).ToList();
+                return View(foodListViewModel);
             }
         }
 
@@ -54,21 +63,23 @@ namespace MacroTracker.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                Food food = foodContext.Foods.Find(id);
+                var foodViewModel = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
 
-                if (food == null)
+                if (foodViewModel == null)
                 {
                     return HttpNotFound();
                 }
-                return View(food);
+
+
+                return View(foodViewModel);
             }
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            var food = new Food();
-            return View("Create", food);
+            var foodViewModel = new FoodViewModel();
+            return View("Create", foodViewModel);
         }
 
 
@@ -99,34 +110,39 @@ namespace MacroTracker.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                Food food = foodContext.Foods.Find(id);
+                var foodViewModel = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
 
-                if (food == null)
+                if (foodViewModel == null)
                 {
                     return HttpNotFound();
                 }
-                return View(food);
+                return View(foodViewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(Food food)
+        public ActionResult Edit(FoodViewModel foodViewModel)
         {
             if (ModelState.IsValid)
             {
                 using (var foodContext = new FoodContext())
 
                 {
-                    var foodToUpdate = foodContext.Foods.Find(food.FoodId);
-                    foodToUpdate.FoodName = food.FoodName;
-                    foodToUpdate.ProteinGrams = food.ProteinGrams;
-                    foodToUpdate.CarbGrams = food.CarbGrams;
-                    foodToUpdate.FatGrams = food.FatGrams;
-                    foodContext.SaveChanges();
-                    return RedirectToAction("Index");
+                    var foodToUpdate = foodContext.Foods.SingleOrDefault(f => f.FoodId == foodViewModel.FoodId);
+
+                    if (foodToUpdate != null)
+                    {
+                        foodToUpdate.FoodName = foodViewModel.FoodName;
+                        foodToUpdate.ProteinGrams = foodViewModel.ProteinGrams;
+                        foodToUpdate.CarbGrams = foodViewModel.CarbGrams;
+                        foodToUpdate.FatGrams = foodViewModel.FatGrams;
+                        foodContext.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    
                 }     
             }
-            return View(food);
+            return new HttpNotFoundResult();
         }
 
 

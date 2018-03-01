@@ -13,32 +13,32 @@ namespace MacroTracker.Controllers
 {
     public class FoodsConsumedController : Controller
     {
-        // GET: Entries
-        [HttpGet]
+        //GET: Entries
+       [HttpGet]
         public ActionResult Index()
         {
             using (var foodContext = new FoodContext())
             {
-                var foodsEaten = new FoodsConsumed
+                var foodsEaten = new FoodsConsumedListViewModel
                 {
                     // Convert each Food to a FoodsConsumed
-                    FoodsEaten = foodContext.Foods.Select(r => new FoodsConsumed
+                    FoodsEaten = foodContext.FoodsConsumedDb.Select(r => new FoodsConsumedViewModel
                     {
-                        FoodsConsumedId = r.FoodId,
-                        ConsumedFoodName = r.FoodName,
-                        ConsumedCarbGrams = r.CarbGrams,
-                        ConsumedFatGrams = r.FatGrams,
-                        ConsumedProteinGrams = r.ProteinGrams
+                        FoodsConsumedId = r.FoodsConsumedId,
+                        ConsumedFoodName = r.ConsumedFoodName,
+                        ConsumedCarbGrams = r.ConsumedCarbGrams,
+                        ConsumedFatGrams = r.ConsumedFatGrams,
+                        ConsumedProteinGrams = r.ConsumedProteinGrams
                     }).ToList()
                 };
 
                 //foodsEaten.FoodsEaten = foodsEaten.FoodsEaten.Count();
                 return View(foodsEaten);
-        };
-    }
+            };
+        }
 
 
-    [HttpGet]
+        [HttpGet]
         public ActionResult Add()
         {
             var foodConsumed = new FoodsConsumed();
