@@ -11,8 +11,6 @@ namespace MacroTracker.Models
     {
         public int? FoodsConsumedId { get; set; }
 
-        //public List<Food> FoodsEaten { get; set; }
-
         [DisplayName("Food Name")]
         [StringLength(50)]
         public string ConsumedFoodName { get; set; }

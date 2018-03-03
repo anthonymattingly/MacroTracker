@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,7 +15,7 @@ namespace MacroTracker.Controllers
     public class FoodsConsumedController : Controller
     {
         //GET: Entries
-       [HttpGet]
+        [HttpGet]
         public ActionResult Index()
         {
             using (var foodContext = new FoodContext())
@@ -39,41 +40,116 @@ namespace MacroTracker.Controllers
 
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Details(int? id)
         {
-            var foodConsumed = new FoodsConsumed();
-            return View("Add", foodConsumed);
+
+            using (var foodContext = new FoodContext())
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var foodConsumedDetail = foodContext.FoodsConsumedDb.SingleOrDefault(f => f.FoodsConsumedId == id);
+
+                    var foodsConsumedViewModel = new FoodsConsumedViewModel
+                    {
+                        FoodsConsumedId = foodConsumedDetail.FoodsConsumedId,
+                        ConsumedFoodName = foodConsumedDetail.ConsumedFoodName,
+                        ConsumedCarbGrams = foodConsumedDetail.ConsumedCarbGrams,
+                        ConsumedFatGrams = foodConsumedDetail.ConsumedFatGrams,
+                        ConsumedProteinGrams = foodConsumedDetail.ConsumedProteinGrams
+                    };
+                    return View(foodsConsumedViewModel);
+            }
         }
 
 
-        //[HttpPost]
-        //public ActionResult Add(FoodsConsumed foodsConsumed)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        using (var foodContext = new FoodContext())
-        //        {
-        //            foodContext.FoodsConsumedDb.Add(foodsConsumed);
-        //            foodContext.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View(foodsConsumed);
-        //}
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            using (var foodContext = new FoodContext())
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-        //[HttpPost]
-        //public ActionResult Add(DateTime? date, int? activityId, double? duration,
-        //   Entry.IntensityLevel? intensity, bool? exclude, string notes)
-        //{
-        //    ViewBag.Date = ModelState["Date"].Value.AttemptedValue;
-        //    ViewBag.ActivityId = ModelState["ActivityId"].Value.AttemptedValue;
-        //    ViewBag.Duration = ModelState["Duration"].Value.AttemptedValue;
-        //    ViewBag.Intensity = ModelState["Intensity"].Value.AttemptedValue;
-        //    ViewBag.Exclude = ModelState["Exclude"].Value.AttemptedValue;
-        //    ViewBag.Notes = ModelState["Notes"].Value.AttemptedValue;
-        //    return View();
-        //}
+                var foodsConsumedViewModel = foodContext.FoodsConsumedDb.SingleOrDefault(f => f.FoodsConsumedId == id);
+
+                if (foodsConsumedViewModel == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(foodsConsumedViewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FoodsConsumedViewModel foodsConsumedViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var foodContext = new FoodContext())
+
+                {
+                    var foodToUpdate = foodContext.FoodsConsumedDb.SingleOrDefault(f => f.FoodsConsumedId == foodsConsumedViewModel.FoodsConsumedId);
+
+                    if (foodToUpdate != null)
+                    {
+                        foodToUpdate.ConsumedFoodName = foodsConsumedViewModel.ConsumedFoodName;
+                        foodToUpdate.ConsumedProteinGrams = foodsConsumedViewModel.ConsumedProteinGrams;
+                        foodToUpdate.ConsumedCarbGrams = foodsConsumedViewModel.ConsumedCarbGrams;
+                        foodToUpdate.ConsumedFatGrams = foodsConsumedViewModel.ConsumedFatGrams;
+                        foodContext.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                }
+            }
+            return new HttpNotFoundResult();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            using (var foodContext = new FoodContext())
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var foodConsumedViewModel = foodContext.FoodsConsumedDb.SingleOrDefault(f => f.FoodsConsumedId == id);
+
+                if (foodConsumedViewModel == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(foodConsumedViewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (var foodContext = new FoodContext())
+            {
+
+                var foodConsumedToDelete = foodContext.FoodsConsumedDb.SingleOrDefault(f => f.FoodsConsumedId == id);
+
+                if (foodConsumedToDelete != null)
+                {
+                    foodContext.FoodsConsumedDb.Remove(foodConsumedToDelete);
+                    foodContext.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+        }
+
 
 
     }
 }
+

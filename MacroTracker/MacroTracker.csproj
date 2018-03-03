@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\FoodsConsumedController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,7 +172,6 @@
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\FoodController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="FoodContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Food.cs" />
@@ -213,16 +213,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Food\Index.cshtml" />
     <Content Include="Views\Food\Details.cshtml" />
     <Content Include="Views\Food\Create.cshtml" />
     <Content Include="Views\Food\Delete.cshtml" />
     <Content Include="Views\Food\Edit.cshtml" />
-    <Content Include="Views\FoodsConsumed\FoodsConsumed.cshtml" />
-    <Content Include="Views\FoodsConsumed\Add.cshtml" />
     <Content Include="Views\FoodsConsumed\Index.cshtml" />
+    <Content Include="Views\FoodsConsumed\Details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\FoodsConsumed\Edit.cshtml" />
+    <Content Include="Views\FoodsConsumed\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

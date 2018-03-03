@@ -45,15 +45,17 @@ namespace MacroTracker.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                var foodViewModel = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
+                var foodDetail = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
 
-                if (foodViewModel == null)
-                {
-                    return HttpNotFound();
-                }
-
-
-                return View(foodViewModel);
+                    var foodViewModel = new FoodViewModel
+                    {
+                        FoodId = foodDetail.FoodId,
+                        FoodName = foodDetail.FoodName,
+                        FatGrams = foodDetail.FatGrams,
+                        CarbGrams = foodDetail.CarbGrams,
+                        ProteinGrams = foodDetail.ProteinGrams
+                    };
+                    return View(foodViewModel);
             }
         }
 

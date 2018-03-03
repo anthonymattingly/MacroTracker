@@ -13,19 +13,15 @@ namespace MacroTracker.Models
 
         public int FoodsConsumedId { get; set; }
 
-        [DisplayName("Food Name")]
         [StringLength(50)]
         public string ConsumedFoodName { get; set; }
 
-        [DisplayName("Grams of Fat")]
         [Range(0, 9999)]
         public double ConsumedFatGrams { get; set; }
 
-        [DisplayName("Grams of Carbs")]
         [Range(0, 9999)]
         public double ConsumedCarbGrams { get; set; }
 
-        [DisplayName("Grams of Protein")]
         [Range(0, 9999)]
         public double ConsumedProteinGrams { get; set; }
 
