@@ -6,10 +6,13 @@
 }
 
 
-<h2>Index</h2>
+<h2>What'd you have to eat?  NOM NOM NOM</h2>
+
+@*//Link to Add new food to list*@
+
+@Html.ActionLink("Add a new food", "Create", "Food", null, new { @class = "btn btn-primary btn-large" })
 
 <p>
-    What'd you have to eat? Nom Nom
 
     <table class="table table-striped">
         <thead>
@@ -49,8 +52,8 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.FoodId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.FoodId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.FoodId })
-                    @Html.ActionLink("I Had This!", "Index")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FoodId }) |
+                    @Html.ActionLink("I had this!", "Index", "FoodsConsumed")
                 </td>
             </tr>
         }

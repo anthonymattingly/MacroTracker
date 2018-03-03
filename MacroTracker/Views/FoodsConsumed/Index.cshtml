@@ -4,10 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Here's What you had to eat today:</h2>
 
 <p>
-    Here's What you had to eat today:
 
     <table class="table table-striped">
         <thead>
@@ -44,12 +43,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ConsumedProteinGrams)
                 </td>
-                @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.FoodId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.FoodId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.FoodId })
-                    @Html.ActionLink("I Had This!", "Index")
-                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.FoodsConsumedId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.FoodsConsumedId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FoodsConsumedId })
+                </td>
             </tr>
         }
     </table>

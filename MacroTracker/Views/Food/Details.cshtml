@@ -46,28 +46,14 @@
         <td>
             @Html.DisplayFor(model => model.ProteinGrams)
         </td>
-        <td>
-            @Html.ActionLink("Back to List", "Index")
-        </td>
     </tr>
 </table>
 
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-default" /> |
+
     @Html.ActionLink("Back to List", "Index")
-</div>
 
 
-@*@using (Html.BeginForm("FoodsConsumed", "Add", "POST"))
-{
-    @Html.HiddenFor(m => m.FoodId)
 
-    <div class="col-xs-12">
-        <button type="submit" class="btn btn-primary">Save</button>
-        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
-        <hr />
-    </div>
-}*@
 
 
 

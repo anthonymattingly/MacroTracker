@@ -82,7 +82,24 @@ namespace MacroTracker.Controllers
             return View(food);
         }
 
-       
+        //Will take in Food instance, convert to foodsConsumed for HTML link in Food Index View
+        [HttpPost]
+        public ActionResult Create(FoodsConsumed foodsConsumed)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var foodContext = new FoodContext())
+                {
+                    foodContext.FoodsConsumedDb.Add(foodsConsumed);
+                    foodContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(foodsConsumed);
+        }
+
+
+
 
         [HttpGet]
         public ActionResult Edit(int? id)
