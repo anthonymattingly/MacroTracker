@@ -33,24 +33,6 @@ namespace MacroTracker.Controllers
             }
         }
 
-        //Method adds to list of foods the user has consumed for the day rather than list of foods to choose from
-        //The button to add list of foods the user has consumed appears in Index view
-        //[HttpPost]
-        //public ActionResult Index(FoodsConsumed foodsConsumed)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        using (var foodContext = new FoodContext())
-        //        {
-        //            foodContext.FoodsConsumedDb.Add(foodsConsumed);
-        //            foodContext.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View(foodsConsumed);
-        //}
-
-
 
         [HttpGet]
         public ActionResult Details(int? id)
@@ -156,14 +138,13 @@ namespace MacroTracker.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                Food food = foodContext.Foods.Find(id);
+                var foodViewModel = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
 
-                if (food == null)
+                if (foodViewModel == null)
                 {
                     return HttpNotFound();
                 }
-
-                return View(food);
+                return View(foodViewModel);
             }
         }
 
@@ -173,9 +154,14 @@ namespace MacroTracker.Controllers
         {
             using (var foodContext = new FoodContext())
             {
-                Food food = foodContext.Foods.Find(id);
-                foodContext.Foods.Remove(food);
-                foodContext.SaveChanges();
+
+                var foodToDelete = foodContext.Foods.SingleOrDefault(f => f.FoodId == id);
+
+                if(foodToDelete != null)
+                {
+                    foodContext.Foods.Remove(foodToDelete);
+                    foodContext.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
